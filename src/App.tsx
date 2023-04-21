@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Counter} from './Components/Counter/Counter';
+import ButtonIncrement from './Components/Buttons/ButtonIncrement';
+import ButtonReset from './Components/Buttons/ButtonReset';
 
 function App() {
+  const [value, setValue] = useState<number>(0)
+  const maxCounter = 5
+
+  const incrementCounter = () => {
+
+    value === maxCounter ? setValue(maxCounter) : setValue(value)
+    setValue(value + 1);
+  }
+
+  const resetCounter = () => {
+    setValue(0);
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={'App'}>
+      <Counter maxCounter={maxCounter} value={value}/>
+      <div className="buttonWrapper">
+        <ButtonIncrement value={value} incrementCounter={incrementCounter}/>
+        <ButtonReset value={value} resetCounter={resetCounter}/>
+      </div>
     </div>
   );
 }

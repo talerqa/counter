@@ -1,0 +1,14 @@
+.wrapper {
+  margin-top: 20px;
+  font-size: 50px;
+  color: black;
+}
+
+.final {
+  color: #ff00ea;
+  background-color: gold;
+  border-radius: 5px;
+  width: 100px;
+  height: 70px;
+  margin: 0 auto;
+}

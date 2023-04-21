@@ -1,0 +1,11 @@
+.button {
+  background-color: #26a915;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+
+.disabled{
+  background-color: black;
+}
