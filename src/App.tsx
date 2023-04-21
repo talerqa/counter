@@ -7,9 +7,9 @@ import ButtonReset from './Components/Buttons/ButtonReset';
 function App() {
   const [value, setValue] = useState<number>(0)
   const maxCounter = 5
+  const minCounter = 0
 
   const incrementCounter = () => {
-
     value === maxCounter ? setValue(maxCounter) : setValue(value)
     setValue(value + 1);
   }
@@ -23,8 +23,8 @@ function App() {
     <div className={'App'}>
       <Counter maxCounter={maxCounter} value={value}/>
       <div className="buttonWrapper">
-        <ButtonIncrement value={value} incrementCounter={incrementCounter}/>
-        <ButtonReset value={value} resetCounter={resetCounter}/>
+        <ButtonIncrement maxCounter={maxCounter} value={value} incrementCounter={incrementCounter}/>
+        <ButtonReset  minCounter={minCounter}  value={value} resetCounter={resetCounter}/>
       </div>
     </div>
   );
