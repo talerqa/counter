@@ -8,11 +8,11 @@ type CounterType = {
 
 export const Counter = (props: CounterType) => {
 
-  const finalClass =  props.value === props.maxCounter ? s.final : ' '
+  const finalClass =  props.value === props.maxCounter ? s.counter + " " + s.final : s.counter
 
   return (
     <div className={s.wrapper}>
-      <div className={finalClass}>{props.value}</div>
+      <p className={finalClass}>{props.value}</p>
     </div>
   );
 };

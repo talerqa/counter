@@ -11,9 +11,6 @@
 .buttonWrapper {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   margin: 40px;
-}
-.final {
-  background-color: #0015ff;
 }

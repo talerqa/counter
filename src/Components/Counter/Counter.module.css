@@ -1,14 +1,19 @@
 .wrapper {
-  margin-top: 20px;
-  font-size: 50px;
+  margin: 20px auto;
+  font-size: 40px;
   color: black;
+  width: 100px;
+  height: 70px;
+
+}
+
+.counter {
+  margin: 0 auto;
 }
 
 .final {
-  color: #ff00ea;
-  background-color: gold;
+  background-color: #fffb8d;
+  border: 1px solid #2c2c0d;
   border-radius: 5px;
-  width: 100px;
-  height: 70px;
   margin: 0 auto;
 }

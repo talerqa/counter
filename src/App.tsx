@@ -16,7 +16,6 @@ function App() {
 
   const resetCounter = () => {
     setValue(0);
-
   }
 
   return (
