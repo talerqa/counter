@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import './App.css';
-import ButtonIncrement from './Components/Buttons/ButtonIncrement';
-import ButtonReset from './Components/Buttons/ButtonReset';
+import ButtonIncrement from './Components/Counter/Buttons/ButtonIncrement';
+import ButtonReset from './Components/Counter/Buttons/ButtonReset';
 import {MaxValue} from './Components/dataCounter/MaxValue';
 import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
@@ -9,7 +9,7 @@ import {Counter} from './Components/Counter/Counter';
 function App() {
 //useState для значения максимального, минимального и текущего
   const [minValue, setMinValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(0)
+  const [maxValue, setMaxValue] = useState<number>(5)
   const [value, setValue] = useState<number>(maxValue);
   const [status, setStatus] = useState<boolean>(false)
 
@@ -44,7 +44,6 @@ function App() {
     setValue(minValue)
   }
 
-
   ///Если вводим отрицательное значение кнопка красная и дизейблиться
   /// По умолчанию кнопки все задизейблены, раздизейбл, когда мы нажали СЕТ
 
@@ -56,13 +55,12 @@ function App() {
 
           {/*Кнопка информации парвила использования счетчика*/}
           <div>
-            <span>Max value</span>
-            <MaxValue value={maxValue} handlerMaxValue={handlerMaxValue}/>
-          </div>
-
-          <div>
-            <span>Min value</span>
-            <MinValue value={minValue} handlerMinValue={handlerMinValue}/>
+            <MaxValue maxValue={maxValue}
+                      minValue={minValue}
+                      handlerMaxValue={handlerMaxValue}/>
+            <MinValue maxValue={maxValue}
+                      minValue={minValue}
+                      handlerMinValue={handlerMinValue}/>
           </div>
 
           {/*on click buuton show counter and set min value which press user */}
@@ -71,6 +69,7 @@ function App() {
             disabled={maxValue > minValue ? false : true}
             onClick={onSetMinAndMaxValue}>SET
           </button>
+
         </div>
       </div>
       <div className={'Wrapper-counter'}>
@@ -84,14 +83,12 @@ function App() {
             : <span>Enter value and press "set".</span>
         )}
 
-
         <div className="buttonWrapper">
           <ButtonIncrement status={status}
                            maxCounter={maxValue}
                            minCounter={minValue}
                            value={value}
                            incrementCounter={incrementCounter}/>
-
 
           <ButtonReset status={status}
                        maxCounter={maxValue}
