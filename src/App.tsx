@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import ButtonIncrement from './Components/Counter/Buttons/ButtonIncrement';
 import ButtonReset from './Components/Counter/Buttons/ButtonReset';
@@ -9,9 +9,28 @@ import {Counter} from './Components/Counter/Counter';
 function App() {
 //useState для значения максимального, минимального и текущего
   const [minValue, setMinValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(5)
+  const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
   const [status, setStatus] = useState<boolean>(false)
+
+
+  useEffect(() => {
+    const value = Number(localStorage.getItem('value'));
+    const status = Boolean(localStorage.getItem('status'));
+    const minValue = Number(localStorage.getItem('minValue'));
+    const maxValue = Number(localStorage.getItem('maxValue'))
+    setValue(value);
+    setMinValue(minValue);
+    setMaxValue(maxValue);
+    setStatus(status);
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('value', JSON.stringify(value))
+    localStorage.setItem('status', JSON.stringify(status))
+    localStorage.setItem('minValue', JSON.stringify(minValue))
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+  }, [value, status, maxValue, minValue])
 
   const incrementCounter = () => {
     value === maxValue ? setValue(maxValue) : setValue(value)
@@ -43,7 +62,6 @@ function App() {
     setStatus(true)
     setValue(minValue)
   }
-
   ///Если вводим отрицательное значение кнопка красная и дизейблиться
   /// По умолчанию кнопки все задизейблены, раздизейбл, когда мы нажали СЕТ
 
@@ -51,7 +69,7 @@ function App() {
     <div className={'App'}>
       <div className={'Set-counter'}>
         <div>
-        <span>Please, change min and max value. </span>
+          <span>Please, change min and max value. </span>
 
           {/*Кнопка информации парвила использования счетчика*/}
           <div>
