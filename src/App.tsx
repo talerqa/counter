@@ -1,16 +1,16 @@
 import React, {ChangeEvent, useState} from 'react';
 import './App.css';
-import {Counter} from './Components/Counter/Counter';
 import ButtonIncrement from './Components/Buttons/ButtonIncrement';
 import ButtonReset from './Components/Buttons/ButtonReset';
+import {MaxValue} from './Components/dataCounter/MaxValue';
+import {MinValue} from './Components/dataCounter/MinValue';
+import {Counter} from './Components/Counter/Counter';
 
 function App() {
 //useState для значения максимального, минимального и текущего
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
-
-  //
   const [status, setStatus] = useState<boolean>(false)
 
   const incrementCounter = () => {
@@ -57,28 +57,33 @@ function App() {
           {/*Кнопка информации парвила использования счетчика*/}
           <div>
             <span>Max value</span>
-            <input type="number"  value={maxValue} onChange={handlerMaxValue}/>
+            <MaxValue value={maxValue} handlerMaxValue={handlerMaxValue}/>
           </div>
 
           <div>
             <span>Min value</span>
-            <input type="number"  value={minValue} onChange={handlerMinValue}/>
+            <MinValue value={minValue} handlerMinValue={handlerMinValue}/>
           </div>
 
           {/*on click buuton show counter and set min value which press user */}
           <button
             //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
-            disabled={maxValue > minValue ? false : true }
+            disabled={maxValue > minValue ? false : true}
             onClick={onSetMinAndMaxValue}>SET
           </button>
         </div>
       </div>
       <div className={'Wrapper-counter'}>
 
-        {/*If status is true that SHOW COUNTER else SHOW info about need to set max and min number*/}
-        {status
-          ? <Counter maxCounter={maxValue} value={value}/>
-          : <span>Enter value and press "set"</span>}
+        {/*If status true that SHOW COUNTER else SHOW info about need to set max and min number*/}
+        {status ? (
+          <Counter maxCounter={maxValue} value={value}/>
+        ) : (
+          minValue >= maxValue
+            ? <span>Counter value is out of range.</span>
+            : <span>Enter value and press "set".</span>
+        )}
+
 
         <div className="buttonWrapper">
           <ButtonIncrement status={status}
