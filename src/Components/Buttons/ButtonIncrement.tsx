@@ -5,6 +5,8 @@ type ButtonIncrementType = {
   incrementCounter: () => void
   value: number
   maxCounter: number
+  minCounter: number
+  status: boolean
 }
 
 const ButtonIncrement = (props: ButtonIncrementType) => {
@@ -17,8 +19,8 @@ const ButtonIncrement = (props: ButtonIncrementType) => {
   return (
     <div className={'wrapper'}>
       <button
-        disabled={statusDisabled}
-        className={finalCss}
+        className={props.status === true ? s.button : s.disabled + ' ' + s.button}
+        disabled={props.status === true &&  props.value >= props.minCounter && props.value < props.maxCounter ? false : true}
         onClick={props.incrementCounter}>Inc</button>
     </div>
   );

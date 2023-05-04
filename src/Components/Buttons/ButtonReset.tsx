@@ -5,21 +5,19 @@ type ButtonResetType = {
   resetCounter: () => void
   value: number
   minCounter: number
+  status: boolean
+  maxCounter: number
 }
 
 const ButtonReset = (props: ButtonResetType) => {
 
-  const statusDisabled = props.value === props.minCounter
-
-  const finalCss = s.button
-    +(statusDisabled ? ' ' + s.disabled : ' ')
 
   return (
     <div>
       <button
         onClick={props.resetCounter}
-        className={finalCss}
-        disabled={statusDisabled}
+        className={props.status === true && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
+        disabled={props.status === true && props.value > props.minCounter && props.value <= props.maxCounter ? false : true}
       >Reset
       </button>
     </div>

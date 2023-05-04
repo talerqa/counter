@@ -25,11 +25,22 @@ function App() {
 //функция которая берет максимального  значение из введенного  инпута
   const handlerMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
     setMaxValue(Number(event.currentTarget.value))
+
+    //Когда выбираем цифру, после повторного ввода, то показывается Enter value and press "set"
+    setStatus(false)
   }
 
   //функция которая берет минимальное  значение из введенного  инпута
   const handlerMinValue = (event: ChangeEvent<HTMLInputElement>) => {
     setMinValue(Number(event.currentTarget.value))
+    setValue(minValue)
+    //Когда выбираем цифру, после повторного ввода, то показывается Enter value and press "set"
+    setStatus(false)
+  }
+
+
+  const onSetMinAndMaxValue = () => {
+    setStatus(true)
     setValue(minValue)
   }
 
@@ -41,19 +52,24 @@ function App() {
     <div className={'App'}>
       <div className={'Set-counter'}>
         <div>
+        <span>Please, change min and max value. </span>
+
+          {/*Кнопка информации парвила использования счетчика*/}
           <div>
             <span>Max value</span>
-            <input type="number" onChange={handlerMaxValue}/>
+            <input type="number"  value={maxValue} onChange={handlerMaxValue}/>
           </div>
+
           <div>
             <span>Min value</span>
-            <input type="number" onChange={handlerMinValue}/>
+            <input type="number"  value={minValue} onChange={handlerMinValue}/>
           </div>
+
           {/*on click buuton show counter and set min value which press user */}
-          <button onClick={() => {
-            setStatus(true)
-            setValue(minValue)
-          }}>SET
+          <button
+            //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
+            disabled={maxValue > minValue ? false : true }
+            onClick={onSetMinAndMaxValue}>SET
           </button>
         </div>
       </div>
@@ -62,11 +78,21 @@ function App() {
         {/*If status is true that SHOW COUNTER else SHOW info about need to set max and min number*/}
         {status
           ? <Counter maxCounter={maxValue} value={value}/>
-          : <div>asdsdfssf</div>}
+          : <span>Enter value and press "set"</span>}
 
         <div className="buttonWrapper">
-          <ButtonIncrement maxCounter={maxValue} value={value} incrementCounter={incrementCounter}/>
-          <ButtonReset minCounter={minValue} value={value} resetCounter={resetCounter}/>
+          <ButtonIncrement status={status}
+                           maxCounter={maxValue}
+                           minCounter={minValue}
+                           value={value}
+                           incrementCounter={incrementCounter}/>
+
+
+          <ButtonReset status={status}
+                       maxCounter={maxValue}
+                       minCounter={minValue}
+                       value={value}
+                       resetCounter={resetCounter}/>
         </div>
 
       </div>
