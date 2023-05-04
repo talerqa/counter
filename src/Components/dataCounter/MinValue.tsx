@@ -14,7 +14,7 @@ export const MinValue = (props: MinValuePropsType) => {
       type="number"
       value={props.minValue}
       onChange={props.handlerMinValue}
-      className={props.minValue >= props.maxValue ? s.error : s.input}
+      className={props.minValue >= props.maxValue || props.minValue < 0 ? s.error : s.input}
     />
   </div>)
 

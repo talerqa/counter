@@ -78,7 +78,7 @@ function App() {
         {status ? (
           <Counter maxCounter={maxValue} value={value}/>
         ) : (
-          minValue >= maxValue
+          minValue >= maxValue || minValue < 0 || maxValue < 0
             ? <span>Counter value is out of range.</span>
             : <span>Enter value and press "set".</span>
         )}
