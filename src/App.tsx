@@ -11,18 +11,20 @@ function App() {
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
+  //usestate для
   const [status, setStatus] = useState<boolean>(false)
-
 
   useEffect(() => {
     const value = Number(localStorage.getItem('value'));
     const status = Boolean(localStorage.getItem('status'));
     const minValue = Number(localStorage.getItem('minValue'));
     const maxValue = Number(localStorage.getItem('maxValue'))
-    setValue(value);
+
     setMinValue(minValue);
     setMaxValue(maxValue);
+    setValue(value < 0 ? handler() : value);
     setStatus(status);
+
   }, [])
 
   useEffect(() => {
@@ -31,6 +33,11 @@ function App() {
     localStorage.setItem('minValue', JSON.stringify(minValue))
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
   }, [value, status, maxValue, minValue])
+
+  const handler = () => {
+    setStatus(false)
+    return 0
+  }
 
   const incrementCounter = () => {
     value === maxValue ? setValue(maxValue) : setValue(value)
@@ -52,11 +59,10 @@ function App() {
   //функция которая берет минимальное  значение из введенного  инпута
   const handlerMinValue = (event: ChangeEvent<HTMLInputElement>) => {
     setMinValue(Number(event.currentTarget.value))
-    setValue(minValue)
+
     //Когда выбираем цифру, после повторного ввода, то показывается Enter value and press "set"
     setStatus(false)
   }
-
 
   const onSetMinAndMaxValue = () => {
     setStatus(true)
@@ -84,7 +90,9 @@ function App() {
           {/*on click buuton show counter and set min value which press user */}
           <button
             //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
-            disabled={maxValue > minValue ? false : true}
+
+
+            disabled={maxValue > minValue && maxValue >= 0 && minValue >= 0 ? false : true}
             onClick={onSetMinAndMaxValue}>SET
           </button>
 
@@ -96,8 +104,13 @@ function App() {
         {status ? (
           <Counter maxCounter={maxValue} value={value}/>
         ) : (
+          //Минимально установленное больше либо равно макисмально установленно
+          // Минимально установленное меньше 0
+          //Максимально установленое меньше 0
+          //Показываются соответствующие подсказки
           minValue >= maxValue || minValue < 0 || maxValue < 0
             ? <span>Counter value is out of range.</span>
+            //Если условия
             : <span>Enter value and press "set".</span>
         )}
 

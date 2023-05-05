@@ -16,8 +16,9 @@ const ButtonReset = (props: ButtonResetType) => {
     <div>
       <button
         onClick={props.resetCounter}
-        className={props.status === true && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
-        disabled={props.status === true && props.value > props.minCounter && props.value <= props.maxCounter ? false : true}
+        className={props.status && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
+
+        disabled={!(props.status && props.value > props.minCounter && props.value <= props.maxCounter)}
       >Reset
       </button>
     </div>
