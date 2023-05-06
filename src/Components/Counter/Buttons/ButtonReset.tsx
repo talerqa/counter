@@ -1,11 +1,12 @@
 import React from 'react';
 import s from './ButtonReset.module.css'
+import {statusType} from '../../../App';
 
 type ButtonResetType = {
   resetCounter: () => void
   value: number
   minCounter: number
-  status: boolean
+  status: statusType
   maxCounter: number
 }
 

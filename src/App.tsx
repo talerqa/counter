@@ -6,32 +6,34 @@ import {MaxValue} from './Components/dataCounter/MaxValue';
 import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
 
+export type statusType = 'Enter value and press "set".' | 'Counter value is out of range.'
 function App() {
+
 
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
-  const [status, setStatus] = useState<boolean>(false);
-const isDisabled = maxValue <= minValue || maxValue <= 0 || minValue <= 0;
+  const [status, setStatus] = useState<statusType>('Enter value and press "set".');
+  console.log({min: minValue, max: maxValue, value: value, status: status})
+  const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
+
 
   useEffect(() => {
     const value = Number(localStorage.getItem('value'));
-    const status = Boolean(localStorage.getItem('status'));
+    const status = String(localStorage.getItem('status'));
     const minValue = Number(localStorage.getItem('minValue'));
     const maxValue = Number(localStorage.getItem('maxValue'))
 
+    setValue(value);
     setMinValue(minValue);
     setMaxValue(maxValue);
-    setStatus(status)
-    if (value > 0) {
-      setValue(value);
-    } else return setValue(0)
-    setStatus(status);
+
   }, [])
 
-  // useEffect(() => {
-  //   localStorage.setItem('status', JSON.stringify(status))
-  // }, [status])
+  useEffect(() => {
+    localStorage.setItem('minValue', JSON.stringify(minValue))
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+  }, [minValue, maxValue])
 
 
   const incrementCounter = () => {
@@ -44,30 +46,35 @@ const isDisabled = maxValue <= minValue || maxValue <= 0 || minValue <= 0;
     setValue(minValue);
   }
 
-//функция которая берет максимального  значение из введенного  инпута
-  const handlerMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setMaxValue(Number(event.currentTarget.value))
-    //Когда выбираем цифру, после повторного ввода, то показывается Enter value and press "set"
-    setStatus(false) ///String
+
+  const handlerMaxValue = (num: number) => {
+    setMaxValue(num)
+    num <= minValue || num < 0 || minValue < 0
+      ? setStatus('Counter value is out of range.')
+      : setStatus('Enter value and press "set".')
+    localStorage.setItem('status', JSON.stringify(status))
   }
 
   //функция которая берет минимальное  значение из введенного  инпута
-  const handlerMinValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setMinValue(Number(event.currentTarget.value))
-    //Когда выбираем цифру, после повторного ввода, то показывается Enter value and press "set"
-    setStatus(false)
+  const handlerMinValue = (num: number) => {
+    setMinValue(num)
+    maxValue <= num || maxValue < 0 || num < 0
+      ? setStatus('Counter value is out of range.')
+      : setStatus('Enter value and press "set".')
+    localStorage.setItem('status', JSON.stringify(status))
   }
 
   const onSetMinAndMaxValue = () => {
-    setStatus(true);
+    isDisabled
+      ? setStatus('Counter value is out of range.')
+      : setStatus('Enter value and press "set".')
+    setMinValue(minValue);
+    setMaxValue(maxValue);
     setValue(minValue);
     localStorage.setItem('value', JSON.stringify(minValue));
-    localStorage.setItem('minValue', JSON.stringify(minValue))
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
-  };
 
-  // /Если вводим отрицательное значение кнопка красная и дизейблиться
-  /// По умолчанию кнопки все задизейблены, раздизейбл, когда мы нажали СЕТ
+    localStorage.setItem('status', JSON.stringify(status))
+  };
 
   return (
     <div className={'App'}>
@@ -75,7 +82,6 @@ const isDisabled = maxValue <= minValue || maxValue <= 0 || minValue <= 0;
         <div>
           <span>Please, change min and max value. </span>
 
-          {/*Кнопка информации парвила использования счетчика*/}
           <div>
             <MaxValue maxValue={maxValue}
                       minValue={minValue}
@@ -99,7 +105,7 @@ const isDisabled = maxValue <= minValue || maxValue <= 0 || minValue <= 0;
         {/*If status true that SHOW COUNTER else SHOW info about need to set max and min number*/}
 
 
-        <Counter maxCounter={maxValue} value={value} isDisabled={isDisabled}/>
+        <Counter maxCounter={maxValue} minCounter={minValue} value={value} isDisabled={isDisabled} status={status}/>
         {/*{status ? (*/}
         {/*  <Counter maxCounter={maxValue} value={value}/>*/}
         {/*// ) : (*/}
