@@ -6,15 +6,13 @@ import {MaxValue} from './Components/dataCounter/MaxValue';
 import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
 
-export type statusType = 'Enter value and press "set".' | 'Counter value is out of range.'
+export type statusType = 'Enter value and press "set".' | 'Counter value is out of range.' | number
+
 function App() {
-
-
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
   const [status, setStatus] = useState<statusType>('Enter value and press "set".');
-  console.log({min: minValue, max: maxValue, value: value, status: status})
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
 
 
@@ -65,14 +63,13 @@ function App() {
   }
 
   const onSetMinAndMaxValue = () => {
-    isDisabled
-      ? setStatus('Counter value is out of range.')
-      : setStatus('Enter value and press "set".')
+
     setMinValue(minValue);
     setMaxValue(maxValue);
-    setValue(minValue);
-    localStorage.setItem('value', JSON.stringify(minValue));
 
+    setStatus(minValue)
+
+    localStorage.setItem('value', JSON.stringify(minValue));
     localStorage.setItem('status', JSON.stringify(status))
   };
 
@@ -93,7 +90,6 @@ function App() {
 
           <button
             //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
-           // disabled={maxValue > minValue && maxValue >= 0 && minValue >= 0 ? false : true}
             disabled={isDisabled}
             onClick={onSetMinAndMaxValue}>SET
           </button>
@@ -106,13 +102,7 @@ function App() {
 
 
         <Counter maxCounter={maxValue} minCounter={minValue} value={value} isDisabled={isDisabled} status={status}/>
-        {/*{status ? (*/}
-        {/*  <Counter maxCounter={maxValue} value={value}/>*/}
-        {/*// ) : (*/}
-        {/*//   minValue >= maxValue || minValue < 0 || maxValue < 0*/}
-        {/*//     ? <span>Counter value is out of range.</span>*/}
-        {/*//     : <span>Enter value and press "set".</span>*/}
-        {/*// )}*/}
+
 
         <div className="buttonWrapper">
           <ButtonIncrement status={status}

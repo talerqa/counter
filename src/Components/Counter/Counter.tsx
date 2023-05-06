@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Counter.module.css'
 import {statusType} from '../../App';
+import {isDisabled} from '@testing-library/user-event/dist/utils';
 
 type CounterType = {
   value: number
@@ -14,11 +15,12 @@ export const Counter = (props: CounterType) => {
 
   const finalClass =  props.value === props.maxCounter ? s.counter + " " + s.final : s.counter
   console.log(props.status)
-  //props.value === 0
+  console.log(props.value)
+  console.log(!props.isDisabled)
+
   return (
     <div className={s.wrapper}>
-      <p>{props.status}
-      </p>
+      { props.status }
     </div>
   );
 };
