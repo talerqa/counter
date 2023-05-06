@@ -10,17 +10,11 @@ type ButtonIncrementType = {
 }
 
 const ButtonIncrement = (props: ButtonIncrementType) => {
-
-  const statusDisabled = props.value === props.maxCounter
-
-  const finalCss = s.button
-  +(statusDisabled ? ' ' + s.disabled : ' ')
-
   return (
     <div className={'wrapper'}>
       <button
-        className={props.status === true ? s.button : s.disabled + ' ' + s.button}
-        disabled={props.status === true &&  props.value >= props.minCounter && props.value < props.maxCounter ? false : true}
+        className={props.status ? s.button : s.disabled + ' ' + s.button}
+        disabled={props.status === true && props.value >= props.minCounter && props.value < props.maxCounter ? false : true}
         onClick={props.incrementCounter}>Inc</button>
     </div>
   );

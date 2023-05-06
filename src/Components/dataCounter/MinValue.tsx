@@ -8,13 +8,14 @@ type MinValuePropsType = {
 }
 
 export const MinValue = (props: MinValuePropsType) => {
+  const condition = props.minValue >= props.maxValue || props.minValue < 0
   return (<div>
     <span>Min value</span>
     <input
       type="number"
       value={props.minValue}
       onChange={props.handlerMinValue}
-      className={props.minValue >= props.maxValue || props.minValue < 0 ? s.error : s.input}
+      className={ condition ? s.error : s.input}
     />
   </div>)
 

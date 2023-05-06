@@ -8,12 +8,13 @@ type MaxValuePropsType = {
 }
 
 export const MaxValue = (props: MaxValuePropsType) => {
+  const condition = props.minValue >= props.maxValue || props.maxValue < 0
   return (<div>
     <span>Max value</span>
     <input type="number"
            value={props.maxValue}
            onChange={props.handlerMaxValue}
-           className={props.minValue >= props.maxValue || props.maxValue < 0 ? s.error : s.input}
+           className={condition ? s.error : s.input}
     />
   </div>)
 }

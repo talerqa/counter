@@ -11,13 +11,11 @@ type ButtonResetType = {
 
 const ButtonReset = (props: ButtonResetType) => {
 
-
   return (
     <div>
       <button
         onClick={props.resetCounter}
         className={props.status && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
-
         disabled={!(props.status && props.value > props.minCounter && props.value <= props.maxCounter)}
       >Reset
       </button>
