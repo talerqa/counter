@@ -1,5 +1,5 @@
 import React from 'react';
-import {statusType, titleType} from '../../../App';
+import {statusType, TitleType} from '../../../App';
 import s from './ButtonUpdateCounter.module.css';
 
 
@@ -10,11 +10,11 @@ type ButtonUpdateCounterType = {
   minCounter: number
   status: statusType
   maxCounter: number
-  title: titleType
+  title: TitleType
+
 }
 
 export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
-
 
   //При вызове - колбэк увеличивает значение счетчика
   const onClickHandlerIncrement = () => {
@@ -27,12 +27,24 @@ export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
   }
 
   //Условия для классов когда они дизейблятся
-  const conditionIncrement = props.status >= props.minCounter
+  const conditionIncrement = props.status >= props.minCounter && (props.status !== props.maxCounter)
     ? s.buttonIncrement
     : s.disabled + ' ' + s.buttonIncrement
+
   const conditionReset = props.status > props.minCounter
     ? s.buttonReset
     : s.disabled + ' ' + s.buttonReset
+
+
+  const isDisabledIncrement = props.maxCounter === props.value
+  const isDisabledReset = props.minCounter === props.value
+
+  //Условия для дизейбла кнопки
+  const isDisableButton = typeof props.status !== 'number' // Если строка сразу дизейбл
+    ? true
+    : props.title === 'INCREMENT' && isDisabledIncrement
+      ? true
+      : props.title === 'RESET' && isDisabledReset
 
   return (
     <div className={'wrapper'}>
@@ -41,7 +53,7 @@ export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
         className={props.title === 'INCREMENT' ? conditionIncrement : conditionReset}
 
         //Статус тут может быть СТРОКОЙ поэтмоу проверка, ели число, то раздизейб
-        disabled={typeof props.status !== 'number'}
+        disabled={isDisableButton}
 
         //Клик и вызов функции в зависимости от названия по которому мы нажали
         onClick={props.title === 'INCREMENT' ? onClickHandlerIncrement : onClickHandlerReset}>

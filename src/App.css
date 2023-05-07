@@ -19,11 +19,13 @@
 
 .Set-counter{
   width: 400px;
-  border: 1px solid red;
+  border: 1px solid #ffabab;
   background-color: bisque;
+  border-radius: 5px;
 }
 
 .Wrapper-counter {
-  border: 1px solid red;
+  border: 1px solid #ffabab;
   background-color: bisque;
+  border-radius: 5px;
 }

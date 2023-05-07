@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {statusType, titleInputValue} from '../../App';
+import {statusType, TitleInputValue} from '../../App';
 import s from './InputChangeValue.module.css';
 
 
@@ -9,13 +9,12 @@ type valuePropsType = {
   handlerMaxValue: (num: number, status: any) => void
   handlerMinValue: (num: number, status: any) => void
   status: statusType
-  title: titleInputValue
+  title: TitleInputValue
 }
 
 export const InputChangeValue = (props: valuePropsType) => {
 
   const condition = props.minValue >= props.maxValue || props.minValue < 0
-
 
   const onChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
     let changedValue = Number(event.currentTarget.value)

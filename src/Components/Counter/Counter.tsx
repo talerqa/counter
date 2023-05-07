@@ -13,12 +13,12 @@ type CounterType = {
 export const Counter = (props: CounterType) => {
 
   const finalClass = props.value === props.maxCounter
+  const conditionClassCounter = typeof props.status !== 'number'
+    ? s.wrapper
+    : finalClass
+      ? s.final + ' ' + s.number : s.number
   return (
-    <div className={
-      typeof props.status !== 'number'
-        ? s.wrapper
-        : finalClass
-          ? s.final + ' ' + s.number : s.number}>
+    <div className={conditionClassCounter}>
       {props.status}
     </div>
   );

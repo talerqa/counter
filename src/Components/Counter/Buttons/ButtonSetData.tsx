@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ButtonSetDataProps = {
+type ButtonSetDataProps  = {
   maxValue: number
   minValue: number
   value: number
