@@ -1,17 +1,26 @@
 import React, {ChangeEvent} from 'react';
 import s from './Value.module.css'
+import {statusType} from '../../App';
 
 type MinValuePropsType = {
   maxValue: number
   minValue: number
-  handlerMinValue: (num: number) => void
+  handlerMinValue: (num: number, status: any) => void
+  //onSetMinAndMaxValue: (maxValue: number, minValue: number, status: any) => void
 }
 
 export const MinValue = (props: MinValuePropsType) => {
   const condition = props.minValue >= props.maxValue || props.minValue < 0
 
   const handler = (event: ChangeEvent<HTMLInputElement>) => {
-    props.handlerMinValue(Number(event.currentTarget.value))
+    let changedNumber = Number(event.currentTarget.value)
+    let status
+    props.maxValue <= changedNumber || props.maxValue < 0 || changedNumber < 0
+      ? status = 'Counter value is out of range.'
+      : status = 'Enter value and press set.'
+    props.handlerMinValue(changedNumber, status)
+   // props.onSetMinAndMaxValue(props.maxValue,changedNumber,status)
+
   }
 
 

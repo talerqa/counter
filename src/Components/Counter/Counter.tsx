@@ -14,9 +14,6 @@ type CounterType = {
 export const Counter = (props: CounterType) => {
 
   const finalClass =  props.value === props.maxCounter ? s.counter + " " + s.final : s.counter
-  console.log(props.status)
-  console.log(props.value)
-  console.log(!props.isDisabled)
 
   return (
     <div className={s.wrapper}>

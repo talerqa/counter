@@ -1,36 +1,39 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import ButtonIncrement from './Components/Counter/Buttons/ButtonIncrement';
 import ButtonReset from './Components/Counter/Buttons/ButtonReset';
 import {MaxValue} from './Components/dataCounter/MaxValue';
 import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
+import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
 
-export type statusType = 'Enter value and press "set".' | 'Counter value is out of range.' | number
+export type statusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
 
 function App() {
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
-  const [status, setStatus] = useState<statusType>('Enter value and press "set".');
+  const [status, setStatus] = useState<statusType>('Enter value and press set.');
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
 
 
   useEffect(() => {
-    const value = Number(localStorage.getItem('value'));
-    const status = String(localStorage.getItem('status'));
-    const minValue = Number(localStorage.getItem('minValue'));
-    const maxValue = Number(localStorage.getItem('maxValue'))
+    const storedValue = localStorage.getItem('value');
+    const storedStatus = localStorage.getItem('status')
+    const storedMinValue = localStorage.getItem('minValue');
+    const storedMaxValue = localStorage.getItem('maxValue');
 
-    setValue(value);
-    setMinValue(minValue);
-    setMaxValue(maxValue);
+    setValue(Number(storedValue));
+    setStatus(storedStatus as statusType);
+    setMinValue(Number(storedMinValue));
+    setMaxValue(Number(storedMaxValue));
 
   }, [])
 
   useEffect(() => {
     localStorage.setItem('minValue', JSON.stringify(minValue))
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
+
   }, [minValue, maxValue])
 
 
@@ -45,34 +48,34 @@ function App() {
   }
 
 
-  const handlerMaxValue = (num: number) => {
+  const handlerMaxValue = (num: number, status: statusType) => {
     setMaxValue(num)
-    num <= minValue || num < 0 || minValue < 0
-      ? setStatus('Counter value is out of range.')
-      : setStatus('Enter value and press "set".')
+    setStatus(status)
     localStorage.setItem('status', JSON.stringify(status))
   }
 
   //функция которая берет минимальное  значение из введенного  инпута
-  const handlerMinValue = (num: number) => {
+  const handlerMinValue = (num: number, status: statusType) => {
     setMinValue(num)
-    maxValue <= num || maxValue < 0 || num < 0
-      ? setStatus('Counter value is out of range.')
-      : setStatus('Enter value and press "set".')
+    console.log(num)
+    setStatus(status)
     localStorage.setItem('status', JSON.stringify(status))
-  }
 
-  const onSetMinAndMaxValue = () => {
+  }
+  console.log({value1: value, status: status, maxValue: maxValue, minValu: minValue})
+  const onSetMinAndMaxValue = (maxValue: number, minValue: number, value: number) => {
+    console.log({value1: value, status: status, maxValue: maxValue, minValu: minValue})
 
     setMinValue(minValue);
-    setMaxValue(maxValue);
+    setValue(minValue)
 
-    setStatus(minValue)
 
-    localStorage.setItem('value', JSON.stringify(minValue));
-    localStorage.setItem('status', JSON.stringify(status))
+    // setMaxValue(maxValue);
+     setStatus(minValue)
+
+    // localStorage.setItem('status', JSON.stringify(status))
+    localStorage.setItem('value', JSON.stringify(value));
   };
-
   return (
     <div className={'App'}>
       <div className={'Set-counter'}>
@@ -82,27 +85,30 @@ function App() {
           <div>
             <MaxValue maxValue={maxValue}
                       minValue={minValue}
-                      handlerMaxValue={handlerMaxValue}/>
+                      handlerMaxValue={handlerMaxValue}
+            />
             <MinValue maxValue={maxValue}
                       minValue={minValue}
-                      handlerMinValue={handlerMinValue}/>
+                      handlerMinValue={handlerMinValue}
+            />
           </div>
 
-          <button
-            //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
-            disabled={isDisabled}
-            onClick={onSetMinAndMaxValue}>SET
-          </button>
+
+          <ButtonSetData maxValue={maxValue}
+                         minValue={minValue}
+                         value={value}
+                         disabled={isDisabled} onSetMinAndMaxValue={onSetMinAndMaxValue}/>
 
         </div>
       </div>
       <div className={'Wrapper-counter'}>
 
-        {/*If status true that SHOW COUNTER else SHOW info about need to set max and min number*/}
 
-
-        <Counter maxCounter={maxValue} minCounter={minValue} value={value} isDisabled={isDisabled} status={status}/>
-
+        <Counter maxCounter={maxValue}
+                 minCounter={minValue}
+                 value={value}
+                 isDisabled={isDisabled}
+                 status={status}/>
 
         <div className="buttonWrapper">
           <ButtonIncrement status={status}
