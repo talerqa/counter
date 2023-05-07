@@ -20,11 +20,8 @@ const ButtonIncrement = (props: ButtonIncrementType) => {
     <div className={'wrapper'}>
       <button
         className={props.status ? s.button : s.disabled + ' ' + s.button}
-        disabled={
-        typeof props.status === 'number'
-          ? false
-          : true}
-        onClick={onClickHandler}>Inc</button>
+        disabled={typeof props.status !== 'number'}
+        onClick={onClickHandler}>INC</button>
     </div>
   );
 };

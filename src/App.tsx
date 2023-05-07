@@ -39,21 +39,21 @@ function App() {
     localStorage.setItem('minValue', JSON.stringify(minValue))
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
     localStorage.setItem('status', JSON.stringify(status))
+    localStorage.setItem('value', JSON.stringify(value))
 
-  }, [minValue, maxValue, status])
+  }, [minValue, maxValue, status, value])
 
 
   const incrementCounter = (maxValue: number, value: number) => {
-    //сетаем в value значение которое увеличиваем
-
     if(value !== maxValue) {
       setValue(value + 1);
       setStatus(value + 1);
     }
   }
 
-  const resetCounter = () => {
+  const resetCounter = (minValue: number, value: number) => {
     setValue(minValue);
+    setStatus(minValue);
   }
 
 

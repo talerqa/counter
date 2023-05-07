@@ -3,7 +3,7 @@ import s from './ButtonReset.module.css'
 import {statusType} from '../../../App';
 
 type ButtonResetType = {
-  resetCounter: () => void
+  resetCounter: (minValue: number, value: number) => void
   value: number
   minCounter: number
   status: statusType
@@ -12,12 +12,16 @@ type ButtonResetType = {
 
 const ButtonReset = (props: ButtonResetType) => {
 
+  const handler = () => {
+    props.resetCounter(props.minCounter, props.value)
+  }
+
   return (
     <div>
       <button
-        onClick={props.resetCounter}
+        onClick={handler}
         className={props.status && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
-        disabled={!(props.status && props.value > props.minCounter && props.value <= props.maxCounter)}
+        disabled={typeof props.status !== 'number'}
       >Reset
       </button>
     </div>
