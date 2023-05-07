@@ -1,4 +1,9 @@
+.inputGood {
+  background-color: #26a915;
+}
+
 .input {
+  background-color: white;
 }
 
 .error {

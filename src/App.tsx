@@ -89,10 +89,12 @@ function App() {
             <MaxValue maxValue={maxValue}
                       minValue={minValue}
                       handlerMaxValue={handlerMaxValue}
+                      status={status}
             />
             <MinValue maxValue={maxValue}
                       minValue={minValue}
                       handlerMinValue={handlerMinValue}
+                      status={status}
             />
           </div>
 

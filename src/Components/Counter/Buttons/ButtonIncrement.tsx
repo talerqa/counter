@@ -15,8 +15,7 @@ const ButtonIncrement = (props: ButtonIncrementType) => {
   const onClickHandler = () => {
     props.incrementCounter(props.maxCounter, props.value)
   }
-  console.log(props.status)
-  console.log(props.minCounter)
+
   return (
     <div className={'wrapper'}>
       <button

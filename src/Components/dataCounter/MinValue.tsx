@@ -6,9 +6,12 @@ type MinValuePropsType = {
   maxValue: number
   minValue: number
   handlerMinValue: (num: number, status: any) => void
+  status: statusType
 }
 
 export const MinValue = (props: MinValuePropsType) => {
+
+
   const condition = props.minValue >= props.maxValue || props.minValue < 0
 
   const handler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +20,7 @@ export const MinValue = (props: MinValuePropsType) => {
     props.maxValue <= changedNumber || props.maxValue < 0 || changedNumber < 0
       ? status = 'Counter value is out of range.'
       : status = 'Enter value and press set.'
+
     props.handlerMinValue(changedNumber, status)
 
   }
@@ -28,7 +32,10 @@ export const MinValue = (props: MinValuePropsType) => {
       type="number"
       value={props.minValue}
       onChange={handler}
-      className={ condition ? s.error : s.input}
+      className={props.status === 'Counter value is out of range.'
+        ? s.error
+        : condition
+          ? s.input : s.inputGood }
     />
   </div>)
 

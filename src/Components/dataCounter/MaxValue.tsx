@@ -1,10 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import s from './Value.module.css';
+import {statusType} from '../../App';
 
 type MaxValuePropsType = {
   maxValue: number
   minValue: number
   handlerMaxValue: (num: number, status: any) => void
+  status: statusType
 }
 
 export const MaxValue = (props: MaxValuePropsType) => {
@@ -21,13 +23,18 @@ export const MaxValue = (props: MaxValuePropsType) => {
     props.handlerMaxValue(Number(event.currentTarget.value), status);
 
   }
+  console.log(props.status)
+
 
   return (<div>
     <span>Max value</span>
     <input type="number"
            value={props.maxValue}
            onChange={handler}
-           className={condition ? s.error : s.input}
+           className={props.status === 'Counter value is out of range.'
+             ? s.error
+             : condition
+               ?  s.input : s.inputGood }
     />
   </div>)
 }
