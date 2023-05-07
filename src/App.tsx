@@ -6,10 +6,13 @@ import {MaxValue} from './Components/dataCounter/MaxValue';
 import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
 import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
+import {ButtonUpdateCounter} from './Components/Counter/Buttons/ButtonUpdateCounter';
 
 export type statusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
 
 function App() {
+
+
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(0)
   const [value, setValue] = useState<number>(maxValue);
@@ -116,17 +119,27 @@ function App() {
                  status={status}/>
 
         <div className="buttonWrapper">
-          <ButtonIncrement status={status}
-                           maxCounter={maxValue}
-                           minCounter={minValue}
-                           value={value}
-                           incrementCounter={incrementCounter}/>
+          {/*<ButtonIncrement status={status}*/}
+          {/*                 maxCounter={maxValue}*/}
+          {/*                 minCounter={minValue}*/}
+          {/*                 value={value}*/}
+          {/*                 incrementCounter={incrementCounter}/>*/}
 
-          <ButtonReset status={status}
-                       maxCounter={maxValue}
-                       minCounter={minValue}
-                       value={value}
-                       resetCounter={resetCounter}/>
+          {/*<ButtonReset status={status}*/}
+          {/*             maxCounter={maxValue}*/}
+          {/*             minCounter={minValue}*/}
+          {/*             value={value}*/}
+          {/*             resetCounter={resetCounter}/>*/}
+
+        <ButtonUpdateCounter
+          status={status}
+          maxCounter={maxValue}
+          minCounter={minValue}
+          value={value}
+          incrementCounter={incrementCounter}
+          resetCounter={resetCounter}
+        />
+
         </div>
       </div>
     </div>

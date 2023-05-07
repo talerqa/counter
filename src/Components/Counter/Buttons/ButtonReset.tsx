@@ -24,7 +24,7 @@ const ButtonReset = (props: ButtonResetType) => {
           ? s.button
           : s.disabled + ' ' + s.button}
         disabled={typeof props.status !== 'number'}
-      >Reset
+      >RESET
       </button>
     </div>
   );

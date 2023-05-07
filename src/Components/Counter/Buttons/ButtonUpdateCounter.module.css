@@ -1,0 +1,21 @@
+.buttonIncrement {
+  background-color: #26a915;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+
+
+
+.buttonReset {
+  background-color: #912b2b;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+
+.disabled {
+  background-color: rgba(0, 0, 0, 0.32);
+}

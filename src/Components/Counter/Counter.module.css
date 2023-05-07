@@ -21,6 +21,7 @@
 
 .final {
   color: red;
+  margin: 20px auto;
   border-radius: 5px;
-  margin: 0 auto;
+
 }

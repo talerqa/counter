@@ -35,7 +35,7 @@ export const MinValue = (props: MinValuePropsType) => {
       className={props.status === 'Counter value is out of range.'
         ? s.error
         : condition
-          ? s.input : s.inputGood }
+          ? s.input : s.inputActive }
     />
   </div>)
 
