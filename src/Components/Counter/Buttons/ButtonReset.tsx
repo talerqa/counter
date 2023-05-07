@@ -20,7 +20,9 @@ const ButtonReset = (props: ButtonResetType) => {
     <div>
       <button
         onClick={handler}
-        className={props.status && props.value >= props.minCounter ? s.button : s.disabled + ' ' + s.button}
+        className={props.status > props.minCounter
+          ? s.button
+          : s.disabled + ' ' + s.button}
         disabled={typeof props.status !== 'number'}
       >Reset
       </button>

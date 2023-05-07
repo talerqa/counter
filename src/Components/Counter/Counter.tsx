@@ -15,14 +15,13 @@ export const Counter = (props: CounterType) => {
   const finalClass =  props.value === props.maxCounter ? s.counter + " " + s.final : s.counter
 
   return (
-    <div className={s.wrapper}>
+    <div className={
+      typeof props.status === 'number'
+        ? s.number
+        : s.wrapper}>
       { props.status }
     </div>
   );
 };
 
-
-//
-//props.maxCounter === 0 || props.value === 0
-// props.minCounter >= props.maxCounter || props.minCounter < 0 || props.maxCounter < 0
 

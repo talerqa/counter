@@ -15,13 +15,17 @@ const ButtonIncrement = (props: ButtonIncrementType) => {
   const onClickHandler = () => {
     props.incrementCounter(props.maxCounter, props.value)
   }
-
+  console.log(props.status)
+  console.log(props.minCounter)
   return (
     <div className={'wrapper'}>
       <button
-        className={props.status ? s.button : s.disabled + ' ' + s.button}
+        className={props.status >= props.minCounter
+          ? s.button
+          : s.disabled + ' ' + s.button}
         disabled={typeof props.status !== 'number'}
-        onClick={onClickHandler}>INC</button>
+        onClick={onClickHandler}>INC
+      </button>
     </div>
   );
 };

@@ -70,7 +70,6 @@ function App() {
     localStorage.setItem('status', JSON.stringify(status))
 
   }
-  console.log({value1: value, status: status, maxValue: maxValue, minValue: minValue})
   const onSetMinAndMaxValue = (maxValue: number, minValue: number, value: number) => {
     setMinValue(minValue);
     setValue(minValue)
@@ -101,7 +100,8 @@ function App() {
           <ButtonSetData maxValue={maxValue}
                          minValue={minValue}
                          value={value}
-                         disabled={isDisabled} onSetMinAndMaxValue={onSetMinAndMaxValue}/>
+                         disabled={isDisabled}
+                         onSetMinAndMaxValue={onSetMinAndMaxValue}/>
         </div>
       </div>
       <div className={'Wrapper-counter'}>
