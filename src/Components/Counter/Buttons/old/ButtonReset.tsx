@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ButtonReset.module.css'
-import {statusType} from '../../../App';
+import {statusType} from '../../../../App';
 
 type ButtonResetType = {
   resetCounter: (minValue: number, value: number) => void

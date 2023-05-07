@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import {statusType, titleInputValue} from '../../App';
-import s from './Value.module.css';
+import s from './InputChangeValue.module.css';
 
 
 type valuePropsType = {

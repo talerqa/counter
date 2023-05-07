@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ButtonIncrement.module.css'
-import {statusType} from '../../../App';
+import {statusType} from '../../../../App';
 
 type ButtonIncrementType = {
   incrementCounter: (maxValue: number, value: number)  => void

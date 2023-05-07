@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
-import s from './Value.module.css'
-import {statusType} from '../../App';
+import s from '../InputChangeValue.module.css'
+import {statusType} from '../../../App';
 
 type MinValuePropsType = {
   maxValue: number
