@@ -16,25 +16,31 @@ function App() {
   const [status, setStatus] = useState<statusType>('Enter value and press set.');
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
 
-
   useEffect(() => {
     const storedValue = localStorage.getItem('value');
-    const storedStatus = localStorage.getItem('status')
+    const storedStatus = localStorage.getItem('status');
     const storedMinValue = localStorage.getItem('minValue');
     const storedMaxValue = localStorage.getItem('maxValue');
 
-    setValue(Number(storedValue));
-    setStatus(storedStatus as statusType);
     setMinValue(Number(storedMinValue));
     setMaxValue(Number(storedMaxValue));
+    setValue(Number(storedValue))
 
+    if (storedStatus !== null) {
+      if (typeof storedStatus === 'string') {
+        return setStatus(JSON.parse(storedStatus) as statusType);
+      } else {
+        return setStatus(Number(storedValue) as statusType);
+      }
+    }
   }, [])
 
   useEffect(() => {
     localStorage.setItem('minValue', JSON.stringify(minValue))
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    localStorage.setItem('status', JSON.stringify(status))
 
-  }, [minValue, maxValue])
+  }, [minValue, maxValue, status])
 
 
   const incrementCounter = () => {
@@ -57,23 +63,18 @@ function App() {
   //функция которая берет минимальное  значение из введенного  инпута
   const handlerMinValue = (num: number, status: statusType) => {
     setMinValue(num)
-    console.log(num)
     setStatus(status)
     localStorage.setItem('status', JSON.stringify(status))
 
   }
-  console.log({value1: value, status: status, maxValue: maxValue, minValu: minValue})
+  console.log({value1: value, status: status, maxValue: maxValue, minValue: minValue})
   const onSetMinAndMaxValue = (maxValue: number, minValue: number, value: number) => {
-    console.log({value1: value, status: status, maxValue: maxValue, minValu: minValue})
-
     setMinValue(minValue);
     setValue(minValue)
+    setMaxValue(maxValue);
+    setStatus(minValue)
 
-
-    // setMaxValue(maxValue);
-     setStatus(minValue)
-
-    // localStorage.setItem('status', JSON.stringify(status))
+    localStorage.setItem('status', JSON.stringify(status))
     localStorage.setItem('value', JSON.stringify(value));
   };
   return (
@@ -98,7 +99,6 @@ function App() {
                          minValue={minValue}
                          value={value}
                          disabled={isDisabled} onSetMinAndMaxValue={onSetMinAndMaxValue}/>
-
         </div>
       </div>
       <div className={'Wrapper-counter'}>
