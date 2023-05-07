@@ -13,17 +13,24 @@ export type titleInputValue = 'Max Value' | 'Min Value'
 
 function App() {
 
+  //Тайтл и условия для универсальных инпута и баттона
   const title: titleType[] = ['INCREMENT', 'RESET'];
-
   const titleInputValue: titleInputValue[] = ['Max Value', 'Min Value']
+
 
   const [minValue, setMinValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(0);
   const [value, setValue] = useState<number>(maxValue);
+
+  //status в котором находится счетчик Нужно ввести значение либо Значения не допустимы либо Счетчик
   const [status, setStatus] = useState<statusType>('Enter value and press set.');
+
+  //Условия дизейбла кнопки
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
 
   useEffect(() => {
+
+    //Получаем локальный стейт
     const storedValue = localStorage.getItem('value');
     const storedStatus = localStorage.getItem('status');
     const storedMinValue = localStorage.getItem('minValue');
@@ -33,13 +40,13 @@ function App() {
     setMaxValue(Number(storedMaxValue));
     setValue(Number(storedValue))
 
+
+    //Ели не null то парсится status в зависимости от типа statusType
+
     if (storedStatus !== null) {
-      if (typeof storedStatus === 'string') {
-        return setStatus(JSON.parse(storedStatus) as statusType);
-      } else {
-        return setStatus(Number(storedValue) as statusType);
-      }
+      return setStatus(JSON.parse(storedStatus) as statusType);
     }
+
   }, [])
 
   useEffect(() => {
@@ -50,20 +57,22 @@ function App() {
 
   }, [minValue, maxValue, status, value])
 
-
+//Увеличиваем значение счетчика
   const incrementCounter = (maxValue: number, value: number) => {
-    if(value !== maxValue) {
+
+    // Если текущее value === maxValue которое в инпуте, то счетчик не увеличивается
+    if (value !== maxValue) {
       setValue(value + 1);
       setStatus(value + 1);
     }
   }
 
-  const resetCounter = (minValue: number, value: number) => {
+  const resetCounter = (minValue: number) => {
     setValue(minValue);
     setStatus(minValue);
   }
 
-
+  //функция которая берет максимально  значение из введенного  инпута
   const handlerMaxValue = (num: number, status: statusType) => {
     setMaxValue(num)
     setStatus(status)
@@ -75,8 +84,9 @@ function App() {
     setMinValue(num)
     setStatus(status)
     localStorage.setItem('status', JSON.stringify(status))
-
   }
+
+
   const onSetMinAndMaxValue = (maxValue: number, minValue: number, value: number) => {
     setMinValue(minValue);
     setValue(minValue)
@@ -90,20 +100,11 @@ function App() {
     <div className={'App'}>
       <div className={'Set-counter'}>
         <div>
-          <span>Please, change min and max value. </span>
+          <span>Please, change MIN and MAX value and press SET. </span>
 
           <div>
-            {/*<MaxValue maxValue={maxValue}*/}
-            {/*          minValue={minValue}*/}
-            {/*          handlerMaxValue={handlerMaxValue}*/}
-            {/*          status={status}*/}
-            {/*/>*/}
-            {/*<MinValue maxValue={maxValue}*/}
-            {/*          minValue={minValue}*/}
-            {/*          handlerMinValue={handlerMinValue}*/}
-            {/*          status={status}*/}
-            {/*/>*/}
 
+            {/* ?? Нормально ли мапить массив из названий  */}
             {
               titleInputValue.map(buttonName => {
                 return <InputChangeValue
@@ -117,9 +118,7 @@ function App() {
               })
             }
 
-
           </div>
-
 
           <ButtonSetData maxValue={maxValue}
                          minValue={minValue}
@@ -130,7 +129,6 @@ function App() {
       </div>
       <div className={'Wrapper-counter'}>
 
-
         <Counter maxCounter={maxValue}
                  minCounter={minValue}
                  value={value}
@@ -138,17 +136,6 @@ function App() {
                  status={status}/>
 
         <div className="buttonWrapper">
-          {/*<ButtonIncrement status={status}*/}
-          {/*                 maxCounter={maxValue}*/}
-          {/*                 minCounter={minValue}*/}
-          {/*                 value={value}*/}
-          {/*                 incrementCounter={incrementCounter}/>*/}
-
-          {/*<ButtonReset status={status}*/}
-          {/*             maxCounter={maxValue}*/}
-          {/*             minCounter={minValue}*/}
-          {/*             value={value}*/}
-          {/*             resetCounter={resetCounter}/>*/}
 
           {title.map(buttonName => {
             return <ButtonUpdateCounter
@@ -160,11 +147,7 @@ function App() {
               resetCounter={resetCounter}
               title={buttonName}
             />
-          })
-
-          }
-
-
+          })}
         </div>
       </div>
     </div>

@@ -16,14 +16,14 @@ export const InputChangeValue = (props: valuePropsType) => {
 
   const condition = props.minValue >= props.maxValue || props.minValue < 0
 
+
   const onChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
     let changedValue = Number(event.currentTarget.value)
     let status
-
     changedValue <= props.minValue || changedValue < 0 || props.minValue < 0
       ? status = 'Counter value is out of range.'
       : status = 'Enter value and press set.'
-
+      //кладу Number(event.currentTarget.value) потому что сломается из-за status
     props.handlerMaxValue(Number(event.currentTarget.value), status);
   }
 
@@ -33,7 +33,6 @@ export const InputChangeValue = (props: valuePropsType) => {
     props.maxValue <= changedNumber || props.maxValue < 0 || changedNumber < 0
       ? status = 'Counter value is out of range.'
       : status = 'Enter value and press set.'
-
     props.handlerMinValue(changedNumber, status)
   }
 
