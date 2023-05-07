@@ -5,7 +5,6 @@ type MaxValuePropsType = {
   maxValue: number
   minValue: number
   handlerMaxValue: (num: number, status: any) => void
- // onSetMinAndMaxValue: (maxValue: number, minValue: number, status: any) => void
 }
 
 export const MaxValue = (props: MaxValuePropsType) => {
@@ -21,7 +20,6 @@ export const MaxValue = (props: MaxValuePropsType) => {
 
     props.handlerMaxValue(Number(event.currentTarget.value), status);
 
-    //props.onSetMinAndMaxValue(props.minValue, changedValue, status)
   }
 
   return (<div>

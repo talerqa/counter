@@ -43,10 +43,13 @@ function App() {
   }, [minValue, maxValue, status])
 
 
-  const incrementCounter = () => {
+  const incrementCounter = (maxValue: number, value: number) => {
     //сетаем в value значение которое увеличиваем
-    value === maxValue ? setValue(maxValue) : setValue(value) // ?нужно ли это
-    setValue(value + 1);
+
+    if(value !== maxValue) {
+      setValue(value + 1);
+      setStatus(value + 1);
+    }
   }
 
   const resetCounter = () => {

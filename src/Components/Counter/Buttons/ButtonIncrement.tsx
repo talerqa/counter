@@ -3,7 +3,7 @@ import s from './ButtonIncrement.module.css'
 import {statusType} from '../../../App';
 
 type ButtonIncrementType = {
-  incrementCounter: () => void
+  incrementCounter: (maxValue: number, value: number)  => void
   value: number
   maxCounter: number
   minCounter: number
@@ -11,12 +11,20 @@ type ButtonIncrementType = {
 }
 
 const ButtonIncrement = (props: ButtonIncrementType) => {
+
+  const onClickHandler = () => {
+    props.incrementCounter(props.maxCounter, props.value)
+  }
+
   return (
     <div className={'wrapper'}>
       <button
         className={props.status ? s.button : s.disabled + ' ' + s.button}
-        disabled={props.status === 'Enter value and press set.' && props.value >= props.minCounter && props.value < props.maxCounter ? false : true}
-        onClick={props.incrementCounter}>Inc</button>
+        disabled={
+        typeof props.status === 'number'
+          ? false
+          : true}
+        onClick={onClickHandler}>Inc</button>
     </div>
   );
 };

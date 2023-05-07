@@ -6,7 +6,6 @@ type MinValuePropsType = {
   maxValue: number
   minValue: number
   handlerMinValue: (num: number, status: any) => void
-  //onSetMinAndMaxValue: (maxValue: number, minValue: number, status: any) => void
 }
 
 export const MinValue = (props: MinValuePropsType) => {
@@ -19,7 +18,6 @@ export const MinValue = (props: MinValuePropsType) => {
       ? status = 'Counter value is out of range.'
       : status = 'Enter value and press set.'
     props.handlerMinValue(changedNumber, status)
-   // props.onSetMinAndMaxValue(props.maxValue,changedNumber,status)
 
   }
 
