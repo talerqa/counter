@@ -23,7 +23,6 @@ export const MaxValue = (props: MaxValuePropsType) => {
     props.handlerMaxValue(Number(event.currentTarget.value), status);
 
   }
-  console.log(props.status)
 
 
   return (<div>

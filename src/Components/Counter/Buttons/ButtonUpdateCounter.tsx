@@ -1,5 +1,5 @@
 import React from 'react';
-import {statusType} from '../../../App';
+import {statusType, titleType} from '../../../App';
 import s from './ButtonUpdateCounter.module.css';
 
 
@@ -10,15 +10,10 @@ type ButtonUpdateCounterType = {
   minCounter: number
   status: statusType
   maxCounter: number
+  title: titleType
 }
 
-type titleType = 'INCREMENT' | 'RESET'
-
 export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
-
-  const title = ['INCREMENT', 'RESET']
-
-  // const [title, setTitle] = useState<titleType>('INCREMENT')
 
   const onClickHandlerIncrement = () => {
     props.incrementCounter(props.maxCounter, props.value)
@@ -40,19 +35,16 @@ export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
   return (
     <div className={'wrapper'}>
 
-      {title.map(buttonTitle => {
-          return <button
-            className={ buttonTitle === 'INCREMENT' ? conditionIncrement : conditionReset}
-            disabled={typeof props.status !== 'number'}
-            onClick={
-              buttonTitle === 'INCREMENT' ? onClickHandlerIncrement : onClickHandlerReset
-            }
-          >
-            {buttonTitle}
-          </button>
+
+      <button
+        className={props.title === 'INCREMENT' ? conditionIncrement : conditionReset}
+        disabled={typeof props.status !== 'number'}
+        onClick={
+          props.title === 'INCREMENT' ? onClickHandlerIncrement : onClickHandlerReset
         }
-      )
-      }
+      >
+        {props.title}
+      </button>
 
 
     </div>

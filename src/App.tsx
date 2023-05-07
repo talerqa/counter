@@ -1,20 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import ButtonIncrement from './Components/Counter/Buttons/ButtonIncrement';
-import ButtonReset from './Components/Counter/Buttons/ButtonReset';
-import {MaxValue} from './Components/dataCounter/MaxValue';
-import {MinValue} from './Components/dataCounter/MinValue';
 import {Counter} from './Components/Counter/Counter';
 import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
 import {ButtonUpdateCounter} from './Components/Counter/Buttons/ButtonUpdateCounter';
+import {InputChangeValue} from './Components/dataCounter/InputChangeValue';
 
 export type statusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
 
+export type titleType = 'INCREMENT' | 'RESET'
+
+export type titleInputValue = 'Max Value' | 'Min Value'
+
 function App() {
 
+  const title: titleType[] = ['INCREMENT', 'RESET'];
 
-  const [minValue, setMinValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(0)
+  const titleInputValue: titleInputValue[] = ['Max Value', 'Min Value']
+
+  const [minValue, setMinValue] = useState<number>(0);
+  const [maxValue, setMaxValue] = useState<number>(0);
   const [value, setValue] = useState<number>(maxValue);
   const [status, setStatus] = useState<statusType>('Enter value and press set.');
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
@@ -89,16 +93,31 @@ function App() {
           <span>Please, change min and max value. </span>
 
           <div>
-            <MaxValue maxValue={maxValue}
-                      minValue={minValue}
-                      handlerMaxValue={handlerMaxValue}
-                      status={status}
-            />
-            <MinValue maxValue={maxValue}
-                      minValue={minValue}
-                      handlerMinValue={handlerMinValue}
-                      status={status}
-            />
+            {/*<MaxValue maxValue={maxValue}*/}
+            {/*          minValue={minValue}*/}
+            {/*          handlerMaxValue={handlerMaxValue}*/}
+            {/*          status={status}*/}
+            {/*/>*/}
+            {/*<MinValue maxValue={maxValue}*/}
+            {/*          minValue={minValue}*/}
+            {/*          handlerMinValue={handlerMinValue}*/}
+            {/*          status={status}*/}
+            {/*/>*/}
+
+            {
+              titleInputValue.map(buttonName => {
+                return <InputChangeValue
+                  maxValue={maxValue}
+                  minValue={minValue}
+                  handlerMaxValue={handlerMaxValue}
+                  handlerMinValue={handlerMinValue}
+                  status={status}
+                  title={buttonName}
+                />
+              })
+            }
+
+
           </div>
 
 
@@ -131,14 +150,20 @@ function App() {
           {/*             value={value}*/}
           {/*             resetCounter={resetCounter}/>*/}
 
-        <ButtonUpdateCounter
-          status={status}
-          maxCounter={maxValue}
-          minCounter={minValue}
-          value={value}
-          incrementCounter={incrementCounter}
-          resetCounter={resetCounter}
-        />
+          {title.map(buttonName => {
+            return <ButtonUpdateCounter
+              status={status}
+              maxCounter={maxValue}
+              minCounter={minValue}
+              value={value}
+              incrementCounter={incrementCounter}
+              resetCounter={resetCounter}
+              title={buttonName}
+            />
+          })
+
+          }
+
 
         </div>
       </div>
