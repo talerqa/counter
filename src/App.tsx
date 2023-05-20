@@ -4,9 +4,9 @@ import {Counter} from './Components/Counter/Counter';
 import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
 import {ButtonUpdateCounter} from './Components/Counter/Buttons/ButtonUpdateCounter';
 import {InputChangeValue} from './Components/dataCounter/InputChangeValue';
-import {enterValueAC, statusReducer} from './StatusReducer';
+import {enterValueAC, statusReducer} from './Reducer/StatusReducer';
 
-export type StatusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
+export type StatusType = 'Enter value and press set' | 'Counter value is out of range' | number
 
 export type TitleType = 'INCREMENT' | 'RESET'
 
@@ -23,10 +23,8 @@ function App() {
   const [value, setValue] = useState<number>(maxValue);
 
   //status в котором находится счетчик Нужно ввести значение либо Значения не допустимы либо Счетчик
-  // const [status, setStatus] = useState<StatusType>('Enter value and press set.');
-
   const [status, dispatchStatus] = useReducer(statusReducer,
-    'Enter value and press set.')
+    'Enter value and press set')
 
   //Условия дизейбла кнопок
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
@@ -108,10 +106,9 @@ function App() {
 
   return (
     <div className={'App'}>
-      <div className={'Set-counter'}>
+      <div className={'SetCounter'}>
         <div>
-          <span>Please, change MIN and MAX value and press SET. </span>
-
+          <span className={'SetCounter-title'}>Please, change MIN and MAX value and press SET</span>
           <div className={'Set-input'}>
             {titleInputValue.map(buttonName => {
               return <InputChangeValue
@@ -134,15 +131,12 @@ function App() {
         </div>
       </div>
       <div className={'Wrapper-counter'}>
-
         <Counter maxCounter={maxValue}
                  minCounter={minValue}
                  value={value}
                  isDisabled={isDisabled}
                  status={status}/>
-
-        <div className="buttonWrapper">
-
+        <div className="WrapperButtonsCounter">
           {title.map(buttonName => {
             return <ButtonUpdateCounter
               status={status}
@@ -151,12 +145,7 @@ function App() {
               value={value}
               incrementCounter={incrementCounter}
               resetCounter={resetCounter}
-              title={buttonName}
-
-
-
-            />
-
+              title={buttonName}/>
           })}
         </div>
       </div>

@@ -1,0 +1,15 @@
+.buttonCounter {
+  padding: 15px;
+}
+
+.button {
+  background-color: #f6fff6;
+  font-size: 40px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.buttonActive:active {
+  background-color: rgba(38, 169, 21, 0.52);
+}

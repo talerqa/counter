@@ -1,13 +1,17 @@
 .inputDefault {
-  border-radius: 2px;
+  border-radius: 5px;
+  height: 50px;
+  text-align: center;
+  font-size: 30px;
 }
 
 .inputActive {
-  background-color: #26a915;
+  background-color: rgba(38, 169, 21, 0.52);
   margin-top: 5px;
   margin-bottom: 5px;
-
 }
+
+
 
 .input {
   background-color: white;
@@ -15,8 +19,10 @@
   margin-bottom: 5px;
 }
 
+
+
 .error {
-  background-color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.6);
   margin-top: 5px;
   margin-bottom: 5px;
 
@@ -24,4 +30,5 @@
 
 .spanTitle {
   padding-right: 10px;
+  font-size: 33px;
 }

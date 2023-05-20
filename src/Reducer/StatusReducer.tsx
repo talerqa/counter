@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusType} from './App';
+import {StatusType} from '../App';
 
 export const statusReducer = (state: any, action: EnterValueACType) => {
   switch (action.type) {

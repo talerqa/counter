@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './ButtonSetCounter.module.css'
 
 type ButtonSetDataProps  = {
   maxValue: number
@@ -12,8 +13,8 @@ export const ButtonSetData = (props: ButtonSetDataProps) => {
   const handler = () => props.onSetMinAndMaxValue(props.maxValue, props.minValue, props.value)
 
   return (
-    <div>
-      <button
+    <div className={s.buttonCounter}>
+      <button className={!props.disabled ? s.button + ' ' + s.buttonActive : s.button}
         //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
         disabled={props.disabled}
         onClick={handler}>SET
