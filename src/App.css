@@ -24,6 +24,10 @@
   border-radius: 5px;
 }
 
+.Set-input {
+  margin-top: 30px;
+}
+
 .Wrapper-counter {
   border: 1px solid #ffabab;
   background-color: bisque;

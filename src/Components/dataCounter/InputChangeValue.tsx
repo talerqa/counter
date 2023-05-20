@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {statusType, TitleInputValue} from '../../App';
+import {StatusType, TitleInputValue} from '../../App';
 import s from './InputChangeValue.module.css';
 
 
@@ -8,7 +8,7 @@ type valuePropsType = {
   minValue: number
   handlerMaxValue: (num: number, status: any) => void
   handlerMinValue: (num: number, status: any) => void
-  status: statusType
+  status: StatusType
   title: TitleInputValue
 }
 
@@ -37,15 +37,16 @@ export const InputChangeValue = (props: valuePropsType) => {
 
   return (
     <div>
-      <span>{props.title === 'Max Value' ? 'Max Value' : 'Min Value'}</span>
+      <span className={s.spanTitle}>{props.title === 'Max Value' ? 'Max Value' : 'Min Value'}</span>
       <input
         type="number"
         value={props.title === 'Max Value' ? props.maxValue : props.minValue}
         onChange={props.title === 'Max Value' ? onChangeMaxValue : onChangeMinValue}
         className={props.status === 'Counter value is out of range.'
-          ? s.error
+          ? s.error + " " + s.inputDefault
           : condition
-            ? s.input : s.inputActive}
+            ? s.input + " " + s.inputDefault
+            : s.inputActive + " " + s.inputDefault}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {statusType, TitleType} from '../../../App';
+import {StatusType, TitleType} from '../../../App';
 import s from './ButtonUpdateCounter.module.css';
 
 
@@ -8,7 +8,7 @@ type ButtonUpdateCounterType = {
   incrementCounter: (maxValue: number, value: number) => void
   value: number
   minCounter: number
-  status: statusType
+  status: StatusType
   maxCounter: number
   title: TitleType
 

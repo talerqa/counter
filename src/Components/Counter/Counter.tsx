@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './Counter.module.css'
-import {statusType} from '../../App';
+import {StatusType} from '../../App';
 
 type CounterType = {
   value: number
   maxCounter: number
   isDisabled: boolean
   minCounter: number
-  status: statusType
+  status: StatusType
 }
 
 export const Counter = (props: CounterType) => {

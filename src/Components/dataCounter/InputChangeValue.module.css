@@ -1,11 +1,27 @@
+.inputDefault {
+  border-radius: 2px;
+}
+
 .inputActive {
   background-color: #26a915;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
 }
 
 .input {
   background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .error {
   background-color: #ff0000;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+}
+
+.spanTitle {
+  padding-right: 10px;
 }

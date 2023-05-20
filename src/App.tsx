@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import './App.css';
 import {Counter} from './Components/Counter/Counter';
 import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
 import {ButtonUpdateCounter} from './Components/Counter/Buttons/ButtonUpdateCounter';
 import {InputChangeValue} from './Components/dataCounter/InputChangeValue';
+import {enterValueAC, statusReducer} from './StatusReducer';
 
-export type statusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
+export type StatusType = 'Enter value and press set.' | 'Counter value is out of range.' | number
 
 export type TitleType = 'INCREMENT' | 'RESET'
 
@@ -22,7 +23,10 @@ function App() {
   const [value, setValue] = useState<number>(maxValue);
 
   //status в котором находится счетчик Нужно ввести значение либо Значения не допустимы либо Счетчик
-  const [status, setStatus] = useState<statusType>('Enter value and press set.');
+  // const [status, setStatus] = useState<StatusType>('Enter value and press set.');
+
+  const [status, dispatchStatus] = useReducer(statusReducer,
+    'Enter value and press set.')
 
   //Условия дизейбла кнопок
   const isDisabled = maxValue <= minValue || maxValue < 0 || minValue < 0;
@@ -36,14 +40,16 @@ function App() {
     const storedMinValue = localStorage.getItem('minValue');
     const storedMaxValue = localStorage.getItem('maxValue');
 
-    // докинуть проверок
+    // докинуть проверок!!!!!!!
     setMinValue(Number(storedMinValue));
     setMaxValue(Number(storedMaxValue));
     setValue(Number(storedValue))
 
     //Ели не null то парсится status в зависимости от типа statusType
     if (storedStatus !== null) {
-      setStatus(JSON.parse(storedStatus) as statusType);
+
+      dispatchStatus(enterValueAC(JSON.parse(storedStatus) as  StatusType))
+      //setStatus(JSON.parse(storedStatus) as StatusType);
     }
 
   }, [])
@@ -62,25 +68,33 @@ function App() {
     // Если текущее value === maxValue которое в инпуте, то счетчик не увеличивается
     if (value !== maxValue) {
       setValue(value + 1);
-      setStatus(value + 1);
+      dispatchStatus(enterValueAC(value + 1))
+
+      //  setStatus(value + 1);
     }
   }
 
   const resetCounter = (minValue: number) => {
     setValue(minValue);
-    setStatus(minValue);
+    dispatchStatus(enterValueAC(minValue))
+
+    //setStatus(minValue);
   }
 
   //функция которая берет максимально  значение из введенного  инпута
-  const handlerMaxValue = (num: number, status: statusType) => {
+  const handlerMaxValue = (num: number, status: StatusType) => {
     setMaxValue(num)
-    setStatus(status)
+    dispatchStatus(enterValueAC(status))
+
+    //    setStatus(status)
   }
 
   //функция которая берет минимальное  значение из введенного  инпута
-  const handlerMinValue = (num: number, status: statusType) => {
+  const handlerMinValue = (num: number, status: StatusType) => {
     setMinValue(num)
-    setStatus(status)
+    dispatchStatus(enterValueAC(status))
+
+    //setStatus(status)
   }
 
 
@@ -88,7 +102,8 @@ function App() {
     setMinValue(minValue);
     setValue(minValue)
     setMaxValue(maxValue);
-    setStatus(minValue)
+    dispatchStatus(enterValueAC(minValue))
+    //    setStatus(minValue)
   };
 
   return (
@@ -97,7 +112,7 @@ function App() {
         <div>
           <span>Please, change MIN and MAX value and press SET. </span>
 
-          <div>
+          <div className={'Set-input'}>
             {titleInputValue.map(buttonName => {
               return <InputChangeValue
                 maxValue={maxValue}
