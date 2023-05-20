@@ -19,7 +19,7 @@ export const Counter = (props: CounterType) => {
       ? s.final + ' ' + s.number : s.number
   return (
     <div className={conditionClassCounter}>
-      {props.status}
+      <span className={s.spanCounter}>{props.status}</span>
     </div>
   );
 };

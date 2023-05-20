@@ -1,12 +1,12 @@
 .buttonCounter {
-  padding: 15px;
+  padding: 40px;
 }
 
 .button {
   background-color: #f6fff6;
   font-size: 40px;
-  padding: 10px 30px;
-  border-radius: 5px;
+  padding: 10px 50px;
+  border-radius: 10px;
   outline: none;
 }
 

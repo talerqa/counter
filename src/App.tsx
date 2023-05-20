@@ -106,49 +106,52 @@ function App() {
 
   return (
     <div className={'App'}>
-      <div className={'SetCounter'}>
-        <div>
-          <span className={'SetCounter-title'}>Please, change MIN and MAX value and press SET</span>
-          <div className={'Set-input'}>
-            {titleInputValue.map(buttonName => {
-              return <InputChangeValue
-                maxValue={maxValue}
-                minValue={minValue}
-                handlerMaxValue={handlerMaxValue}
-                handlerMinValue={handlerMinValue}
+      <div className={'AppWrapper'}>
+        <div className={'SetCounter'}>
+          <div>
+            <span className={'SetCounter-title'}>Change MIN and MAX value and press SET</span>
+            <div className={'Set-input'}>
+              {titleInputValue.map(buttonName => {
+                return <InputChangeValue
+                  maxValue={maxValue}
+                  minValue={minValue}
+                  handlerMaxValue={handlerMaxValue}
+                  handlerMinValue={handlerMinValue}
+                  status={status}
+                  title={buttonName}
+                />
+              })}
+            </div>
+
+            <ButtonSetData maxValue={maxValue}
+                           minValue={minValue}
+                           value={value}
+                           disabled={isDisabled}
+                           onSetMinAndMaxValue={onSetMinAndMaxValue}
+            />
+          </div>
+        </div>
+        <div className={'Wrapper-counter'}>
+          <Counter maxCounter={maxValue}
+                   minCounter={minValue}
+                   value={value}
+                   isDisabled={isDisabled}
+                   status={status}/>
+          <div className="WrapperButtonsCounter">
+            {title.map(buttonName => {
+              return <ButtonUpdateCounter
                 status={status}
-                title={buttonName}
-              />
+                maxCounter={maxValue}
+                minCounter={minValue}
+                value={value}
+                incrementCounter={incrementCounter}
+                resetCounter={resetCounter}
+                title={buttonName}/>
             })}
           </div>
+        </div>
+      </div>
 
-          <ButtonSetData maxValue={maxValue}
-                         minValue={minValue}
-                         value={value}
-                         disabled={isDisabled}
-                         onSetMinAndMaxValue={onSetMinAndMaxValue}
-          />
-        </div>
-      </div>
-      <div className={'Wrapper-counter'}>
-        <Counter maxCounter={maxValue}
-                 minCounter={minValue}
-                 value={value}
-                 isDisabled={isDisabled}
-                 status={status}/>
-        <div className="WrapperButtonsCounter">
-          {title.map(buttonName => {
-            return <ButtonUpdateCounter
-              status={status}
-              maxCounter={maxValue}
-              minCounter={minValue}
-              value={value}
-              incrementCounter={incrementCounter}
-              resetCounter={resetCounter}
-              title={buttonName}/>
-          })}
-        </div>
-      </div>
     </div>
   );
 }

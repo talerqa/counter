@@ -1,6 +1,13 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .inputDefault {
-  border-radius: 5px;
+  margin: 0 auto;
   height: 50px;
+  border-radius: 5px;
   text-align: center;
   font-size: 30px;
 }
@@ -11,21 +18,16 @@
   margin-bottom: 5px;
 }
 
-
-
 .input {
   background-color: white;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-
-
 .error {
   background-color: rgba(255, 0, 0, 0.6);
   margin-top: 5px;
   margin-bottom: 5px;
-
 }
 
 .spanTitle {

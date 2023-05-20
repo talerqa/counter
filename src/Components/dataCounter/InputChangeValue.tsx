@@ -35,7 +35,7 @@ export const InputChangeValue = (props: valuePropsType) => {
   }
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <span className={s.spanTitle}>{props.title === 'Max Value' ? 'Max Value:' : 'Min Value:'}</span>
       <input
         type="number"

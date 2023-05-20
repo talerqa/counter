@@ -15,15 +15,20 @@
   margin: 20px auto;
   color: rgba(0, 0, 0, 0.85);
   width: 200px;
-  border: 3px solid rgba(94, 238, 192, 0.87);
+  border: 5px solid rgba(244, 246, 244, 0.42);
   border-radius: 20px;
-  height: 130px;
+  height: 145px;
+}
+
+.spanCounter {
+  text-align: center;
+  vertical-align: middle;
 }
 
 .final {
-  color: rgba(255, 0, 0, 0.93);
+  color: rgba(255, 0, 0, 0.72);
   margin: 20px auto;
-  border: 3px solid rgba(255, 67, 74, 0.54);
+  border: 5px solid rgba(255, 67, 74, 0.54);
   border-radius: 20px;
-  height: 130px;
+  height: 145px;
 }
