@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import s from './ButtonSetCounter.module.css'
 
 type ButtonSetDataProps  = {
@@ -14,12 +14,12 @@ export const ButtonSetData = (props: ButtonSetDataProps) => {
 
   return (
     <div className={s.buttonCounter}>
-      <button className={!props.disabled ? s.button + ' ' + s.buttonActive : s.button}
+      <button tabIndex={2} className={!props.disabled ? s.button + ' ' + s.buttonActive : s.button}
         //Если большее выбранное число больше меньшего, то кнопка раздизейбливается
-        disabled={props.disabled}
-        onClick={handler}>SET
+              disabled={props.disabled}
+              onClick={handler}>SET
       </button>
     </div>
   );
-};
+}
 

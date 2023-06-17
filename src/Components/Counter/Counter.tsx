@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './Counter.module.css'
 import {StatusType} from '../../App';
 
@@ -11,7 +11,6 @@ type CounterType = {
 }
 
 export const Counter = (props: CounterType) => {
-
   const finalClass = props.value === props.maxCounter
   const conditionClassCounter = typeof props.status !== 'number'
     ? s.wrapper
@@ -22,6 +21,5 @@ export const Counter = (props: CounterType) => {
       <span className={s.spanCounter}>{props.status}</span>
     </div>
   );
-};
-
+}
 

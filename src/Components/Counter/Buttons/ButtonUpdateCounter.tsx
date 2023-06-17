@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {StatusType, TitleType} from '../../../App';
 import s from './ButtonUpdateCounter.module.css';
 
@@ -11,20 +11,19 @@ type ButtonUpdateCounterType = {
   status: StatusType
   maxCounter: number
   title: TitleType
-
 }
 
 export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
 
   //При вызове - колбэк увеличивает значение счетчика
-  const onClickHandlerIncrement = () => {
+  const onClickHandlerIncrement = useCallback(() => {
     props.incrementCounter(props.maxCounter, props.value)
-  }
+  }, [props.maxCounter, props.value])
 
   //При вызове - колбэк сбрасывает значение счетчика
-  const onClickHandlerReset = () => {
+  const onClickHandlerReset = useCallback( () => {
     props.resetCounter(props.minCounter);
-  }
+  }, [props.minCounter])
 
   //Условия для классов когда они дизейблятся
   const conditionIncrement = props.status >= props.minCounter && (props.status !== props.maxCounter)
@@ -63,5 +62,5 @@ export const ButtonUpdateCounter = (props: ButtonUpdateCounterType) => {
 
     </div>
   );
-};
+}
 

@@ -1,23 +1,23 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {StatusType, TitleInputValue} from '../../App';
 import s from './InputChangeValue.module.css';
 
-type valuePropsType = {
+type ValuePropsType = {
   maxValue: number
   minValue: number
-  handlerMaxValue: (num: number, status: any) => void
-  handlerMinValue: (num: number, status: any) => void
+  handlerMaxValue: (num: number, status: StatusType) => void
+  handlerMinValue: (num: number, status: StatusType) => void
   status: StatusType
   title: TitleInputValue
 }
 
-export const InputChangeValue = (props: valuePropsType) => {
+export const InputChangeValue = memo((props: ValuePropsType) => {
 
   const condition = props.minValue >= props.maxValue || props.minValue < 0
 
   const onChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
     let changedValue = Number(event.currentTarget.value)
-    let status
+    let status: StatusType
     changedValue <= props.minValue || changedValue < 0 || props.minValue < 0
       ? status = 'Counter value is out of range'
       : status = 'Enter value and press set'
@@ -27,7 +27,7 @@ export const InputChangeValue = (props: valuePropsType) => {
 
   const onChangeMinValue = (event: ChangeEvent<HTMLInputElement>) => {
     let changedNumber = Number(event.currentTarget.value)
-    let status
+    let status: StatusType
     props.maxValue <= changedNumber || props.maxValue < 0 || changedNumber < 0
       ? status = 'Counter value is out of range'
       : status = 'Enter value and press set'
@@ -49,5 +49,5 @@ export const InputChangeValue = (props: valuePropsType) => {
       />
     </div>
   );
-};
+})
 
