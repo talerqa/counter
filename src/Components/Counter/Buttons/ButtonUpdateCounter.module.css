@@ -19,3 +19,9 @@
 .disabled {
   background-color: rgba(0, 0, 0, 0.32);
 }
+
+@media (max-width: 340px) {
+ .buttonIncrement {
+   padding: 10px 20px;
+ }
+}

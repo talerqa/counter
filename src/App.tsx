@@ -1,5 +1,5 @@
 import React, {memo, useEffect, useState} from 'react';
-import './App.css';
+import s from './App.module.css';
 import {Counter} from './Components/Counter/Counter';
 import {ButtonSetData} from './Components/Counter/Buttons/ButtonSetData';
 import {ButtonUpdateCounter} from './Components/Counter/Buttons/ButtonUpdateCounter';
@@ -99,12 +99,12 @@ export const App = memo(() => {
   }
 
   return (
-    <div className={'App'}>
-      <div className={'AppWrapper'}>
-        <div className={'SetCounter'}>
+    <div className={s.App}>
+      <div className={s.AppWrapper}>
+        <div className={s.SetCounter}>
           <div>
-            <span className={'SetCounter-title'}>Change MIN and MAX value and press SET</span>
-            <div className={'Set-input'}>
+            <span className={s.SetCounterTitle}>Change MIN and MAX value and press SET</span>
+            <div className={s.SetInput}>
               {titleInputValue.map(buttonName => {
                 return <InputChangeValue
                   key={v1()}
@@ -128,7 +128,7 @@ export const App = memo(() => {
             />
           </div>
         </div>
-        <div className={'Wrapper-counter'}>
+        <div className={s.WrapperCounter}>
           <Counter
             key={v1()}
             maxCounter={maxValue}
@@ -136,7 +136,7 @@ export const App = memo(() => {
             value={value}
             isDisabled={isDisabled}
             status={statusCounter}/>
-          <div className="WrapperButtonsCounter">
+          <div className={s.WrapperButtonsCounter}>
             {title.map(buttonName => <ButtonUpdateCounter
                       key={v1()}
                       status={statusCounter}

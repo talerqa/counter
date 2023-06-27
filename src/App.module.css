@@ -9,20 +9,21 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  flex-wrap: wrap;
   border-radius: 5px;
 }
 
 .SetCounter {
-  width: 600px;
   height: 500px;
   border: 1px solid #fcbded;
   background-color: rgba(48, 51, 236, 0.47);
   border-radius: 5px;
   margin: 5px;
-  padding: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-.SetCounter-title {
+.SetCounterTitle {
   margin-top: 30px;
   font-size: 30px;
   padding-left: 5px;
@@ -33,11 +34,12 @@
 .WrapperButtonsCounter {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 40px;
 }
 
-.Set-input {
+.SetInput {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -45,7 +47,7 @@
   min-width: 200px;
 }
 
-.Wrapper-counter {
+.WrapperCounter {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,4 +55,14 @@
   background-color: rgba(48, 51, 236, 0.47);
   border-radius: 5px;
   margin: 5px;
+}
+
+
+
+@media (max-width: 390px) {
+  .WrapperButtonsCounter {
+
+    margin: 5px;
+  }
+  
 }

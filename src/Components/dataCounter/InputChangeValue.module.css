@@ -19,6 +19,7 @@
 }
 
 .input {
+  max-width: 410px;
   background-color: white;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -33,4 +34,15 @@
 .spanTitle {
   padding-right: 10px;
   font-size: 33px;
+}
+
+@media (max-width: 410px) {
+  .input {
+    max-width: 280px;
+}
+
+  .error, .inputActive {
+    max-width: 280px;
+
+  }
 }
